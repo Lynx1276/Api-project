@@ -102,13 +102,25 @@ h1 {
     cursor: not-allowed;
 }
 
+/* Section Title Styles */
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin: 2rem 0 1rem; /* Adjust margin to add spacing above and below */
+    color: var(--text-color);
+    display: block; /* Ensure it spans full width */
+    width: 100%;
+}
+
 /* Recipe Grid Styles */
 .recipes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     padding: 1rem;
+    margin-top: 1rem; /* Ensure grid doesn't overlap with title */
 }
+
 
 .recipe-card {
     background: var(--white);
