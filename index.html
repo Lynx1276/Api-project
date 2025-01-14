@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenPlate - Vegetarian Recipes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>GreenPlate</h1>
+                <p class="subtitle">Discover Delicious Vegetarian Recipes</p>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-box" placeholder="Search for vegetarian recipes...">
+                    <button id="searchButton" class="search-button" onclick="searchRecipes()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div id="recipesGrid" class="recipes-grid">
+            <!-- Recipe cards will be populated here -->
+        </div>
+    </div>
+
+    <!-- Recipe Details Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="recipeDetails" class="recipe-details">
+                <!-- Recipe details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="index.js"></script>
+</body>
+</html>
+        
