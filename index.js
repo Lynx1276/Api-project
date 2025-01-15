@@ -57,8 +57,6 @@ async function fetchRecipes(query, isDefault = false) {
     }
 }
 
-// Rest of the code remains the same...
-
     // Modified search function
     function searchRecipes() {
         const searchInput = document.getElementById('searchInput');
@@ -81,7 +79,7 @@ async function fetchRecipes(query, isDefault = false) {
     }
 
     sectionTitle.textContent = isDefault
-        ? "Featured Vegetarian Recipes"
+        ? "Featured Healthy Recipes"
         : "Search Results";
 
     const recipeCards = recipes.map(({ recipe }, index) => `
