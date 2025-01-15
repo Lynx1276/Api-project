@@ -1,61 +1,63 @@
  // Edamam API Configuration
-        const APP_ID = '74a38f82';
-        const APP_KEY = '4c7f19ab13ca124e75268a975c69ed5a';
-        const BASE_URL = 'https://api.edamam.com/api/recipes/v2';
+const APP_ID = '74a38f82';
+const APP_KEY = '4c7f19ab13ca124e75268a975c69ed5a';
+const BASE_URL = 'https://api.edamam.com/api/recipes/v2';
 
-        let isLoading = false;
-          let currentRecipes = [];
-    
-    // Default search terms for initial load
-    const defaultSearchTerms = ['curry', 'pasta', 'salad', 'soup'];
-    const randomTerm = defaultSearchTerms[Math.floor(Math.random() * defaultSearchTerms.length)];
+let isLoading = false;
+let currentRecipes = [];
 
-    // Load default recipes when page loads
-    window.onload = () => {
-        fetchRecipes(randomTerm, true);
-    };
+// Default search terms for initial load
+const defaultSearchTerms = ['curry', 'pasta', 'salad', 'soup'];
+const randomTerm = defaultSearchTerms[Math.floor(Math.random() * defaultSearchTerms.length)];
 
-    async function fetchRecipes(query, isDefault = false) {
-        const searchInput = document.getElementById('searchInput');
-        const searchButton = document.getElementById('searchButton');
-        const recipesGrid = document.getElementById('recipesGrid');
+// Load default recipes when page loads
+window.onload = () => {
+    fetchRecipes(randomTerm, true);
+};
 
-        if (!isDefault) {
-            query = query.trim();
-            if (!query) {
-                recipesGrid.innerHTML = '<div class="error-message">Please enter a search term</div>';
-                return;
-            }
-        }
+async function fetchRecipes(query, isDefault = false) {
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const recipesGrid = document.getElementById('recipesGrid');
 
-        isLoading = true;
-        searchButton.disabled = true;
-        recipesGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading recipes...</div>';
-
-        try {
-            const response = await fetch(
-                `${BASE_URL}?type=public&q=${encodeURIComponent(query)}&app_id=${APP_ID}&app_key=${APP_KEY}&health=vegetarian&random=true`
-            );
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch recipes');
-            }
-
-            const data = await response.json();
-            currentRecipes = data.hits;
-            displayRecipes(data.hits, isDefault);
-        } catch (error) {
-            recipesGrid.innerHTML = `
-                <div class="error-message">
-                    <i class="fas fa-exclamation-circle"></i> Failed to load recipes. Please try again later.
-                </div>
-            `;
-            console.error('Error fetching recipes:', error);
-        } finally {
-            isLoading = false;
-            searchButton.disabled = false;
+    if (!isDefault) {
+        query = query.trim();
+        if (!query) {
+            recipesGrid.innerHTML = '<div class="error-message">Please enter a search term</div>';
+            return;
         }
     }
+
+    isLoading = true;
+    searchButton.disabled = true;
+    recipesGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading recipes...</div>';
+
+    try {
+        const response = await fetch(
+            `${BASE_URL}?type=public&q=${encodeURIComponent(query)}&app_id=${APP_ID}&app_key=${APP_KEY}&random=true`
+        );
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch recipes');
+        }
+
+        const data = await response.json();
+        currentRecipes = data.hits;
+        displayRecipes(data.hits, isDefault);
+    } catch (error) {
+        recipesGrid.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> Failed to load recipes. Please try again later.
+            </div>
+        `;
+        console.error('Error fetching recipes:', error);
+    } finally {
+        isLoading = false;
+        searchButton.disabled = false;
+    }
+}
+
+// Rest of the code remains the same...
 
     // Modified search function
     function searchRecipes() {
